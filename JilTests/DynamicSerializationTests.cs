@@ -128,6 +128,24 @@ namespace JilTests
         }
 
         [TestMethod]
+        public void ObjectAnonymous()
+        {
+            using (var str = new StringWriter())
+            {
+                var obj = new
+                {
+                    aaa =  17,
+                    zzz = 23
+                };
+                JSON.SerializeDynamic(obj, str);
+                var res = str.ToString();
+                Assert.AreEqual("{\"aaa\":17,\"zzz\":23}", res);  
+                // Assert.AreEqual("{\"zzz\":23,\"aaa\":17}", res);  <- this passes 
+            }
+        }
+
+
+        [TestMethod]
         public void Simple()
         {
             using(var str = new StringWriter())
